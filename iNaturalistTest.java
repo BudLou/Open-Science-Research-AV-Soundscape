@@ -8,9 +8,9 @@ public class iNaturalistTest {
 
     public static void main(String[] args) throws Exception {
 
-        String url = "https://api.inaturalist.org/v1/observations"
+        String url = "https://api.inaturalist.org/v1/observations?taxon_name="
                 //where the search should input should be implemented
-                + "?taxon_name=red-tailed%20hawk"
+                + "red-tailed%20hawk"
                 + "&photos=true&per_page=1";
 
         URL apiUrl = new URL(url);

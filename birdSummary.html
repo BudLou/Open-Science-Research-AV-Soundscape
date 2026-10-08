@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AV Soundscape</title>
+
+    <link rel="stylesheet" href="birdSum.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside id="sidebar">
+
+        <header id="site-title">
+            AV-SOUNDSCAPE
+        </header>
+
+
+        <!-- SEARCH -->
+
+        <section
+            id="search-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Search
+            </h2>
+
+            <form id="search-form">
+
+                <input
+                    id="bird-search"
+                    type="search"
+                    placeholder="Species or Name"
+                    autocomplete="off"
+                >
+
+            </form>
+
+        </section>
+
+
+        <!-- FAMILY FILTERS -->
+
+        <section
+            id="family-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Families
+            </h2>
+
+            <div id="family-list">
+                <!-- JavaScript inserts filters here -->
+            </div>
+
+        </section>
+
+
+        <!-- AUDIO FILTER -->
+
+        <section
+            id="audio-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Bird Calss
+            </h2>
+
+            <div class="filter-row">
+
+                <label for="audio-filter">
+                Available Calls
+                </label>
+
+                <input
+                    id="audio-filter"
+                    type="checkbox"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNT -->
+
+        <section
+            id="account-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+               Google User Profile
+            </h2>
+
+            <button
+                id="account-button"
+                class="account-button"
+                type="button"
+            >
+                Account
+            </button>
+
+            <button
+                id="collection-button"
+                class="account-button"
+                type="button"
+            >
+                My Collection
+            </button>
+
+            <button
+                id="sign-out-button"
+                class="account-button"
+                type="button"
+            >
+                Sign Out
+            </button>
+
+        </section>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main id="main-content">
+
+
+        <!-- SELECTED BIRD -->
+
+        <section id="selected-bird">
+
+
+            <!-- IMAGE -->
+        
+
+            <div id="selected-bird-image-container">
+
+                <img
+                    id="selected-bird-image"
+                    src=""
+                    alt=""
+                >
+
+                <div id="image-placeholder">
+                    Select a bird
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div id="selected-bird-info">
+
+                <h1 id="bird-common-name">
+                    Search for a bird
+                </h1>
+
+                <div id="bird-scientific-name">
+                </div>
+
+                <div id="bird-description">
+                    Search for a bird to view information
+                    about the species.
+                </div>
+
+
+                <!-- AUDIO -->
+
+                <audio
+                    id="bird-audio"
+                    preload="none"
+                >
+
+                    <source
+                        id="bird-audio-source"
+                        src=""
+                    >
+
+                </audio>
+
+                <button
+                    id="play-audio-button"
+                    type="button"
+                    disabled
+                >
+                    ▶ Play Bird Call
+                </button>
+
+
+                <!-- BIRD STATS -->
+
+                <div id="bird-stats">
+
+                    <div class="bird-stat">
+
+                        <span class="stat-label">
+                            Wingspan
+                        </span>
+
+                        <span id="bird-wingspan">
+                            --
+                        </span>
+
+                    </div>
+
+
+                    <div class="bird-stat">
+
+                        <span class="stat-label">
+                            Habitat
+                        </span>
+
+                        <span id="bird-habitat">
+                            --
+                        </span>
+
+                    </div>
+
+
+                    <div class="bird-stat">
+
+                        <span class="stat-label">
+                            Status
+                        </span>
+
+                        <span id="bird-status">
+                            --
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Previous Searches -->
+
+        <section id="catalog">
+
+            <h2 id="catalog-title">
+                Previous Searches
+            </h2>
+
+            <div id="result-count">
+                Search for a species to begin.
+            </div>
+
+
+            <div id="loading-message">
+                Loading birds...
+            </div>
+
+            <div id="error-message">
+                Unable to load bird information.
+            </div>
+
+            <div id="empty-message">
+                No birds found.
+            </div>
+
+
+            <!-- JavaScript inserts bird cards here -->
+
+            <div id="bird-results">
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

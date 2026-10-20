@@ -14,65 +14,59 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const $ = id => document.getElementById(id);
-
-let currentUser = null;
+let user = null;
 let taxonIds = [];
 let highScore = 0;
 let hasScore = false;
 
+// Get the user's saved data from Firestore.
 function playerDoc() {
-  return doc(db, "scores", currentUser.uid);
+  return doc(db, "scores", user.uid);
 }
 
-function render() {
-  $("taxonList").replaceChildren();
+// Display the taxon IDs and high score.
+function displayData() {
+  const list = document.getElementById("taxonList");
+  list.replaceChildren();
 
   taxonIds.forEach(id => {
-    const li = document.createElement("li");
-    li.append(document.createTextNode(id + " "));
+    const item = document.createElement("li");
+    item.textContent = id + " ";
 
     const button = document.createElement("button");
     button.textContent = "Remove";
 
     button.onclick = async () => {
-      const previous = [...taxonIds];
       taxonIds = taxonIds.filter(x => x !== id);
-
-      try {
-        await saveData();
-        render();
-        $("status").textContent = "Taxon ID removed.";
-      } catch (e) {
-        taxonIds = previous;
-        render();
-        $("status").textContent = e.message;
-      }
+      await saveData();
+      displayData();
     };
 
-    li.append(button);
-    $("taxonList").append(li);
+    item.append(button);
+    list.append(item);
   });
 
-  $("highScore").textContent =
+  document.getElementById("highScore").textContent =
     hasScore ? highScore : "No score saved";
 }
 
+// Load the user's saved data.
 async function loadData() {
-  const snap = await getDoc(playerDoc());
-  const data = snap.exists() ? snap.data() : {};
+  const snapshot = await getDoc(playerDoc());
+  const data = snapshot.exists() ? snapshot.data() : {};
 
   taxonIds = data.taxonIds || [];
   hasScore = Number.isInteger(data.highScore);
   highScore = hasScore ? data.highScore : 0;
 
-  render();
+  displayData();
 }
 
+// Save the user's data.
 async function saveData() {
   const data = {
-    taxonIds,
-    displayName: currentUser.displayName || currentUser.email || "Player",
+    taxonIds: taxonIds,
+    displayName: user.displayName || user.email || "Player",
     updatedAt: serverTimestamp()
   };
 
@@ -81,102 +75,59 @@ async function saveData() {
   await setDoc(playerDoc(), data, { merge: true });
 }
 
-$("login").onclick = async () => {
-  try {
-    await signInWithPopup(auth, googleProvider);
-  } catch (e) {
-    $("status").textContent = e.message;
-  }
-};
+// Sign in with Google.
+document.getElementById("login").onclick = () =>
+  signInWithPopup(auth, googleProvider);
 
-$("logout").onclick = async () => {
-  try {
-    await signOut(auth);
-  } catch (e) {
-    $("status").textContent = e.message;
-  }
-};
+// Sign out.
+document.getElementById("logout").onclick = () =>
+  signOut(auth);
 
-$("addTaxon").onclick = async () => {
-  if (!currentUser)
-    return $("status").textContent = "Sign in first.";
+// Add a taxon ID.
+document.getElementById("addTaxon").onclick = async () => {
+  const id = Number(document.getElementById("taxon").value);
 
-  const value = $("taxon").value;
-  const id = Number(value);
-
-  if (!value || !Number.isSafeInteger(id) || id <= 0)
-    return $("status").textContent = "Enter a valid taxon ID.";
-
-  if (taxonIds.includes(id))
-    return $("status").textContent = "ID already exists.";
-
-  if (taxonIds.length >= 1000)
-    return $("status").textContent = "Maximum 1,000 IDs.";
+  if (!user || !Number.isSafeInteger(id) || id <= 0) return;
+  if (taxonIds.includes(id) || taxonIds.length >= 1000) return;
 
   taxonIds.push(id);
+  await saveData();
 
-  try {
-    await saveData();
-    $("taxon").value = "";
-    render();
-    $("status").textContent = "Taxon ID saved.";
-  } catch (e) {
-    taxonIds = taxonIds.filter(x => x !== id);
-    render();
-    $("status").textContent = e.message;
-  }
+  document.getElementById("taxon").value = "";
+  displayData();
 };
 
-$("saveScore").onclick = async () => {
-  if (!currentUser)
-    return $("status").textContent = "Sign in first.";
-
-  const value = $("score").value;
+// Save a high score without lowering the existing score.
+document.getElementById("saveScore").onclick = async () => {
+  const value = document.getElementById("score").value;
   const score = Number(value);
 
-  if (value === "" || !Number.isSafeInteger(score) || score < 0)
-    return $("status").textContent = "Enter a valid score.";
+  if (!user || value === "" || !Number.isSafeInteger(score) || score < 0)
+    return;
 
-  if (hasScore && score < highScore)
-    return $("status").textContent = "You cannot lower your high score.";
-
-  const oldScore = highScore;
-  const oldHasScore = hasScore;
+  if (hasScore && score < highScore) return;
 
   highScore = score;
   hasScore = true;
 
-  try {
-    await saveData();
-    render();
-    $("status").textContent = "High score saved.";
-  } catch (e) {
-    highScore = oldScore;
-    hasScore = oldHasScore;
-    render();
-    $("status").textContent = e.message;
-  }
+  await saveData();
+  displayData();
 };
 
-onAuthStateChanged(auth, async user => {
-  currentUser = user;
-  $("login").hidden = !!user;
-  $("logout").hidden = !user;
-  $("user").textContent = user
+// Update the page when the login state changes.
+onAuthStateChanged(auth, async signedInUser => {
+  user = signedInUser;
+
+  document.getElementById("login").hidden = !!user;
+  document.getElementById("logout").hidden = !user;
+  document.getElementById("user").textContent = user
     ? "Signed in as " + (user.displayName || user.email)
     : "Not signed in";
 
-  if (user) {
-    try {
-      await loadData();
-      $("status").textContent = "Data loaded.";
-    } catch (e) {
-      $("status").textContent = e.message;
-    }
-  } else {
-    taxonIds = [];
-    highScore = 0;
-    hasScore = false;
-    render();
-  }
+  taxonIds = [];
+  highScore = 0;
+  hasScore = false;
+
+  if (user) await loadData();
+  else displayData();
 });

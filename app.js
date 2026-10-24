@@ -63,6 +63,7 @@ async function searchBird(search) {
     emptyMessage.style.display = "none";
 
     birdResults.replaceChildren();
+    clearSelectedBird();
 
     resultCount.textContent = "Searching for " + search + "...";
 

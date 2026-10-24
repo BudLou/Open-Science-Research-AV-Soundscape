@@ -452,4 +452,45 @@ input {
     #main-content {
         grid-template-rows: auto auto;
     }
+
+
+   /* =========================================
+      ADDITIONAL SEARCH STYLING
+   ========================================= */
+   
+   #bird-search:focus {
+       outline: 2px solid #367c39;
+       outline-offset: 2px;
+   }
+   
+   
+   .bird-card a {
+       display: inline-block;
+   
+       margin-top: 5px;
+   
+       font-size: 11px;
+       color: #367c39;
+   
+       text-decoration: none;
+   }
+   
+   .bird-card a:hover {
+       text-decoration: underline;
+   }
+   
+   
+   .bird-card {
+       transition: transform 0.2s ease;
+   }
+   
+   .bird-card:hover {
+       transform: translateY(-3px);
+   }
+   
+   
+   #bird-description {
+       white-space: pre-line;
+       overflow-wrap: anywhere;
+   }
 }

@@ -309,3 +309,30 @@ playAudioButton.addEventListener("click", function() {
     }
 
 });
+
+
+
+function clearSelectedBird() {
+
+    birdImage.removeAttribute("src");
+    birdImage.style.display = "none";
+
+    imagePlaceholder.style.display = "flex";
+
+    birdCommonName.textContent = "Search for a bird";
+    birdScientificName.textContent = "";
+
+    birdDescription.textContent =
+        "Search for a bird to view information about the species.";
+
+    birdWingspan.textContent = "--";
+    birdHabitat.textContent = "--";
+    birdStatus.textContent = "--";
+
+    birdAudio.pause();
+    birdAudio.removeAttribute("src");
+    birdAudio.load();
+
+    playAudioButton.disabled = true;
+    playAudioButton.textContent = "▶ Play Bird Call";
+}

@@ -34,7 +34,12 @@
         >
 
         <!-- Bird search form -->
-        <form class="search-form" id="birdSearchForm">
+        <form
+            class="search-form"
+            id="birdSearchForm"
+            action="./birdSummary.html"
+            method="get"
+        >
 
             <span class="search-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
@@ -46,9 +51,10 @@
             <input
                 type="text"
                 id="birdSearchInput"
-                name="bird"
+                name="search"
                 placeholder="Search for a bird..."
                 aria-label="Search for a bird species"
+                required
             >
 
             <button
@@ -69,12 +75,12 @@
         <div class="button-container">
 
             <button
-    type="submit"
-    form="birdSearchForm"
-    id="enterButton"
->
-    Enter
-</button>
+                type="submit"
+                form="birdSearchForm"
+                id="enterButton"
+            >
+                Enter
+            </button>
 
             <button
                 type="button"
@@ -85,12 +91,14 @@
 
         </div>
 
-        <!-- Message for an empty search -->
-        <p id="searchMessage" class="search-message" aria-live="polite"></p>
+        <!-- Search message -->
+        <p
+            id="searchMessage"
+            class="search-message"
+            aria-live="polite"
+        ></p>
 
     </main>
-
-    <script src="./index.js"></script>
 
 </body>
 

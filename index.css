@@ -1,4 +1,8 @@
-/* General page styling */
+css
+/* ========================================
+   GENERAL STYLES
+======================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -9,26 +13,49 @@ html,
 body {
     width: 100%;
     min-height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: #e0eed8;
-    color: #000;
     min-height: 100vh;
+    background-color: #e0eed8;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
 }
 
-/* Main homepage container */
-main {
-    width: 100%;
-    min-height: 100vh;
-    padding: 48px 0 40px;
+
+/* ========================================
+   SIGN-IN LINK
+======================================== */
+
+.sign-in {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2px;
+
+    color: #333;
+    font-size: 8px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-/* Header */
+.sign-in-icon {
+    font-size: 13px;
+}
+
+.sign-in:hover {
+    color: #555;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
 header {
     position: absolute;
     top: 48px;
@@ -41,110 +68,195 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* Welcome heading */
-main h2 {
-    width: 345px;
-    max-width: calc(100% - 48px);
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
-/* Welcome description */
-main p {
-    width: 345px;
-    max-width: calc(100% - 48px);
+header p {
     font-size: 10px;
-    margin-bottom: 42px;
+    font-weight: 400;
+    line-height: 1.5;
 }
 
-/* Bird image */
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+main {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 129px;
+}
+
+
+/* ========================================
+   BIRD IMAGE
+======================================== */
+
 .bird-image {
     display: block;
+
     width: 235px;
     height: 176px;
+
     object-fit: cover;
+
     margin-bottom: 16px;
 }
 
-/* Search form */
-form {
+
+/* ========================================
+   SEARCH FORM
+======================================== */
+
+.search-form {
     width: 202px;
     height: 30px;
+
+    display: flex;
+    align-items: center;
+
     background-color: #fff;
     border: 1px solid #dadce0;
     border-radius: 7px;
-    display: flex;
-    align-items: center;
+
     padding: 0 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     margin-bottom: 10px;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* Search input */
-form input {
+.search-form input {
     flex: 1;
     min-width: 0;
+    height: 100%;
+
     border: none;
     outline: none;
+
     background: transparent;
+
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
-    color: #333;
-    padding: 5px;
+
+    padding: 0 7px;
 }
 
-form input::placeholder {
-    color: #665;
-}
-
-/* Search and microphone icons */
-.search-icon,
-.mic-icon {
+.search-form input::placeholder {
     color: #666;
-    font-size: 13px;
-    flex-shrink: 0;
 }
 
-/* Buttons container */
+
+/* Search icon */
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon svg {
+    width: 13px;
+    height: 13px;
+
+    fill: none;
+    stroke: #666;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+
+/* Microphone button */
+
+.mic-button {
+    width: 18px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+}
+
+.mic-button svg {
+    width: 13px;
+    height: 13px;
+
+    fill: none;
+    stroke: #666;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* ========================================
+   NAVIGATION BUTTONS
+======================================== */
+
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
+
     gap: 28px;
-    margin-top: 0;
 }
 
-/* Homepage buttons */
 .button-container button {
     width: 71px;
     height: 20px;
+
+    padding: 0 5px;
+
+    white-space: nowrap;
+
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
+
     color: #000;
     background-color: #f1f1f1;
+
     border: 1px solid #888;
     border-radius: 2px;
+
     cursor: pointer;
+}
+
+.button-container button:last-child {
+    width: 90px;
 }
 
 .button-container button:hover {
     background-color: #e5e5e5;
 }
 
-/* Sign-in button */
-.sign-in {
-    position: absolute;
-    top: 5px;
-    right: 8px;
-    font-size: 8px;
-    text-align: center;
-    color: #333;
+.button-container button:focus-visible,
+.sign-in:focus-visible {
+    outline: 2px solid #426b42;
+    outline-offset: 3px;
 }
 
-/* Responsive layout */
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
 @media (max-width: 480px) {
+
+    header {
+        left: 24px;
+    }
+
     main {
-        padding-top: 48px;
+        padding-top: 129px;
     }
 
     .bird-image {
@@ -153,7 +265,7 @@ form input::placeholder {
         aspect-ratio: 4 / 3;
     }
 
-    header {
-        left: 24px;
+    .button-container {
+        gap: 20px;
     }
 }

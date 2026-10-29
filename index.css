@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #e5f1dc;
+
 }
 
 html,
@@ -12,7 +14,7 @@ body {
 }
 
 body {
-    min-height: 100vh;
+    min-height: 50vh;
     background-color: #e5f1dc;
     font-family: Arial, Helvetica, sans-serif;
     color: #000;
@@ -36,7 +38,7 @@ body {
 
 .sign-in-icon {
     font-size: 13px;
-    border: 2px solid #888;
+    border: 1px solid black;
 }
 
 .sign-in:hover {

@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Guessing Game</title>
+    <link rel="stylesheet" href="testGame.css">
+    <script src="gametest.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>Bird Guessing Game</h1>
+
+
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+
+        <p>Round: <span id="progress">0 / 6</span></p>
+        <p>Score: <span id="score">0</span></p>
+        <p>Correct: <span id="correct">0</span></p>
+        <p>Incorrect: <span id="incorrect">0</span></p>
+        <p>Best Score: <span id="best">0</span></p>
+
+
+        <section id="game">
+            <h2>Identify this bird</h2>
+            <p id="specimen"></p>
+
+
+            <img
+                id="birdImage"
+                src=""
+                alt="Bird to identify"
+                width="300"
+            >
+
+
+            <div id="answers"></div>
+
+
+            <p id="feedback" class="feedback"></p>
+
+
+            <button id="listen" type="button"> Hear Bird Call </button>
+
+
+            <button id="next" type="button" disabled> Next Bird </button>
+        </section>
+
+
+        <section id="end" style="display: none;">
+            <h2>Game Complete!</h2>
+            <p id="summary"></p>
+            <button id="restart" type="button">Play Again</button>
+            <button id="playAgain" type="button">Restart Game</button>
+        </section>
+    </main>
+</body>
+</html>
+

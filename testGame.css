@@ -1,0 +1,106 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333333;
+    margin: 0;
+    padding: 20px;
+}
+
+
+
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+
+/*game title */
+h1 {
+    text-align: center;
+}
+
+
+
+
+h2 {
+    text-align: center;
+}
+
+
+/*dropdown */
+select {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+
+/* Round and score information */
+p {
+    line-height: 1.5;
+}
+
+
+/* Bird image */
+#birdImage {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+}
+
+
+/* Game section */
+#game {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+}
+
+
+/* Answer choices container */
+#answers {
+    margin: 15px 0;
+}
+
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+/* Disabled buttons */
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+
+/* Feedback message */
+#feedback {
+    min-height: 24px;
+}
+
+
+/* End-of-game section */
+#end {
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
+}
+
+
+/* Restart and play again buttons */
+#restart,
+#playAgain {
+    margin: 10px;
+}

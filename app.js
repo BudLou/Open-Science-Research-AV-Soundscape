@@ -52,6 +52,21 @@ searchForm.addEventListener("submit", function(event) {
 
 });
 
+// Check for a search sent from the homepage
+const urlParams = new URLSearchParams(window.location.search);
+
+const homepageSearch = urlParams.get("search");
+
+if (homepageSearch && homepageSearch.trim() !== "") {
+
+    // Display the search in the sidebar
+    searchInput.value = homepageSearch;
+
+    // Run the existing search function
+    searchBird(homepageSearch.trim());
+
+}
+
 
 async function searchBird(search) {
 

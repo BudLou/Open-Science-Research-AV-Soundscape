@@ -1,8 +1,4 @@
-css
-/* ========================================
-   GENERAL STYLES
-======================================== */
-
+/* General styles */
 * {
     margin: 0;
     padding: 0;
@@ -22,11 +18,7 @@ body {
     color: #000;
 }
 
-
-/* ========================================
-   SIGN-IN LINK
-======================================== */
-
+/* Sign-in link */
 .sign-in {
     position: absolute;
     top: 7px;
@@ -40,7 +32,6 @@ body {
     color: #333;
     font-size: 8px;
     text-decoration: none;
-    cursor: pointer;
 }
 
 .sign-in-icon {
@@ -51,11 +42,7 @@ body {
     color: #555;
 }
 
-
-/* ========================================
-   HEADER
-======================================== */
-
+/* Header */
 header {
     position: absolute;
     top: 48px;
@@ -70,15 +57,10 @@ header h1 {
 
 header p {
     font-size: 10px;
-    font-weight: 400;
     line-height: 1.5;
 }
 
-
-/* ========================================
-   MAIN CONTENT
-======================================== */
-
+/* Main content */
 main {
     width: 100%;
     min-height: 100vh;
@@ -90,30 +72,19 @@ main {
     padding-top: 129px;
 }
 
-
-/* ========================================
-   BIRD IMAGE
-======================================== */
-
+/* Bird image */
 .bird-image {
     display: block;
-
     width: 235px;
     height: 176px;
-
     object-fit: cover;
-
     margin-bottom: 16px;
 }
 
-
-/* ========================================
-   SEARCH FORM
-======================================== */
-
+/* Search form */
 .search-form {
-    width: 202px;
-    height: 30px;
+    width: 260px;
+    height: 36px;
 
     display: flex;
     align-items: center;
@@ -122,8 +93,8 @@ main {
     border: 1px solid #dadce0;
     border-radius: 7px;
 
-    padding: 0 10px;
-    margin-bottom: 10px;
+    padding: 0 9px;
+    margin-bottom: 12px;
 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
@@ -139,7 +110,7 @@ main {
     background: transparent;
 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    font-size: 12px;
 
     padding: 0 7px;
 }
@@ -148,18 +119,17 @@ main {
     color: #666;
 }
 
-
 /* Search icon */
-
 .search-icon {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.search-icon svg {
-    width: 13px;
-    height: 13px;
+.search-icon svg,
+.search-button svg {
+    width: 15px;
+    height: 15px;
 
     fill: none;
     stroke: #666;
@@ -167,16 +137,14 @@ main {
     stroke-linecap: round;
 }
 
-
-/* Microphone button */
-
-.mic-button {
-    width: 18px;
-    height: 24px;
-
+/* Search button inside the input */
+.search-button {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 25px;
+    height: 28px;
 
     padding: 0;
 
@@ -186,52 +154,35 @@ main {
     cursor: pointer;
 }
 
-.mic-button svg {
-    width: 13px;
-    height: 13px;
-
-    fill: none;
-    stroke: #666;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+.search-button:hover svg {
+    stroke: #222;
 }
 
-
-/* ========================================
-   NAVIGATION BUTTONS
-======================================== */
-
+/* Enter and Guessing Game buttons */
 .button-container {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    gap: 28px;
+    gap: 20px;
 }
 
 .button-container button {
-    width: 71px;
-    height: 20px;
+    min-width: 75px;
+    height: 28px;
 
-    padding: 0 5px;
-
+    padding: 0 10px;
     white-space: nowrap;
 
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    font-size: 11px;
 
     color: #000;
     background-color: #f1f1f1;
 
     border: 1px solid #888;
-    border-radius: 2px;
+    border-radius: 3px;
 
     cursor: pointer;
-}
-
-.button-container button:last-child {
-    width: 90px;
 }
 
 .button-container button:hover {
@@ -239,18 +190,22 @@ main {
 }
 
 .button-container button:focus-visible,
-.sign-in:focus-visible {
+.sign-in:focus-visible,
+.search-button:focus-visible {
     outline: 2px solid #426b42;
     outline-offset: 3px;
 }
 
+/* Empty search message */
+.search-message {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #8b2525;
+    text-align: center;
+}
 
-/* ========================================
-   RESPONSIVE DESIGN
-======================================== */
-
+/* Responsive design */
 @media (max-width: 480px) {
-
     header {
         left: 24px;
     }
@@ -265,7 +220,11 @@ main {
         aspect-ratio: 4 / 3;
     }
 
+    .search-form {
+        width: min(260px, calc(100% - 48px));
+    }
+
     .button-container {
-        gap: 20px;
+        gap: 12px;
     }
 }

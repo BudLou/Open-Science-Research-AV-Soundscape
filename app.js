@@ -91,8 +91,8 @@ async function searchBird(search) {
         + "&taxon_id=3"
         + "&photos=true"
         + "&per_page=20"
-        //the place id for humboldt county is 14
-        + (checkboxFilter.checked ? "&place_id=14" : "");
+        //the place id for humboldt county is 1247
+        + (checkboxFilter.checked ? "&place_id=1247" : "");
 
     try {
 

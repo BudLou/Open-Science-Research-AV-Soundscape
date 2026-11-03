@@ -100,13 +100,6 @@ async function searchBird(search) {
 
         const data = await response.json();
 
-        //fix to no sounds being found
-        console.log("Sound search taxon ID:", taxonId);
-        console.log("Sound API URL:", url);
-        console.log("Total sound observations:", data.total_results);
-        console.log("First sound observation:", data.results[0]);
-        console.log("Sounds array:", data.results[0]?.sounds);
-
         if (searchId !== currentSearch) {
             return;
         }
@@ -395,6 +388,13 @@ async function searchBirdSound(taxonId, searchId) {
 
         const data = await response.json();
 
+        //do not remove; debugged the first time it messed up, and I am not sure if it will run correctly without (might change later)
+        console.log("Sound search taxon ID:", taxonId);
+        console.log("Sound API URL:", url);
+        console.log("Total sound observations:", data.total_results);
+        console.log("First sound observation:", data.results[0]);
+        console.log("Sounds array:", data.results[0]?.sounds);
+
         if (
             searchId !== currentSearch ||
             soundRequestId !== currentSoundRequest
@@ -421,7 +421,7 @@ async function searchBirdSound(taxonId, searchId) {
         const audioUrl = sound.file_url || sound.url;
         console.log("Selected audio URL:", audioUrl);
         
-        birdAudio.src = sound.file_url;
+        birdAudio.src = audioUrl;
         birdAudio.load();
 
         playAudioButton.disabled = false;

@@ -352,3 +352,77 @@ function clearSelectedBird() {
     playAudioButton.disabled = true;
     playAudioButton.textContent = "▶ Play Bird Call";
 }
+
+
+async function searchBirdSound(taxonId, searchId) {
+
+    birdAudio.pause();
+    birdAudio.removeAttribute("src");
+    birdAudio.load();
+
+    playAudioButton.disabled = true;
+    playAudioButton.textContent = "Loading Bird Call...";
+
+    const url =
+        "https://api.inaturalist.org/v1/observations"
+        + "?taxon_id=" + encodeURIComponent(taxonId)
+        + "&sounds=true"
+        + "&per_page=20";
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Unable to retrieve bird sounds");
+        }
+
+        const data = await response.json();
+
+        if (searchId !== currentSearch) {
+            return;
+        }
+        
+        const soundObservation = data.results.find(
+            observation =>
+                observation.sounds?.some(
+                    sound => sound.file_url
+                )
+        );
+
+        if (!soundObservation) {
+            playAudioButton.textContent = "No Bird Call Available";
+            return;
+        }
+
+        const sound = soundObservation.sounds.find(
+            sound => sound.file_url
+        );
+
+        birdAudio.src = sound.file_url;
+        birdAudio.load();
+
+        playAudioButton.disabled = false;
+        playAudioButton.textContent = "▶ Play Bird Call";
+
+        console.log("Bird sound loaded:", sound.file_url);
+        console.log(
+            "Sound observation:",
+            "https://www.inaturalist.org/observations/"
+            + soundObservation.id
+        );
+
+    } catch (error) {
+
+        if (searchId !== currentSearch) {
+            return;
+        }
+
+        console.error("Bird sound error:", error);
+
+        playAudioButton.disabled = true;
+        playAudioButton.textContent = "Bird Call Unavailable";
+
+    }
+}
+

@@ -26,6 +26,8 @@ const birdStatus = document.getElementById("bird-status");
 const birdAudio = document.getElementById("bird-audio");
 const playAudioButton = document.getElementById("play-audio-button");
 
+//variable for checkbox for humboldt filter
+const checkboxFilter = document.getElementById("humboldt-filter");
 
 loadingMessage.style.display = "none";
 errorMessage.style.display = "none";
@@ -88,7 +90,9 @@ async function searchBird(search) {
         + "?taxon_name=" + encodeURIComponent(search)
         + "&taxon_id=3"
         + "&photos=true"
-        + "&per_page=20";
+        + "&per_page=20"
+        //the place id for humboldt county is 14
+        + (checkboxFilter.checked ? "&place_id=14" : "");
 
     try {
 

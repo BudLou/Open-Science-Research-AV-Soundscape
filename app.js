@@ -303,6 +303,15 @@ function selectBird(observation) {
 
     playAudioButton.disabled = true;
 
+     const taxonId = observation.taxon?.id;
+
+    if (taxonId) {
+        searchBirdSound(taxonId, currentSearch);
+    } else {
+        playAudioButton.disabled = true;
+        playAudioButton.textContent = "No Bird Call Available";
+    }
+
 }
 
 
@@ -353,12 +362,13 @@ function clearSelectedBird() {
     playAudioButton.textContent = "▶ Play Bird Call";
 }
 
+//must be here to prevent overwrites
+let currentSoundRequest = 0;
 
 async function searchBirdSound(taxonId, searchId) {
 
-    birdAudio.pause();
-    birdAudio.removeAttribute("src");
-    birdAudio.load();
+
+    const soundRequestId = ++currentSoundRequest;
 
     playAudioButton.disabled = true;
     playAudioButton.textContent = "Loading Bird Call...";
@@ -370,7 +380,6 @@ async function searchBirdSound(taxonId, searchId) {
         + "&per_page=20";
 
     try {
-
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -379,10 +388,13 @@ async function searchBirdSound(taxonId, searchId) {
 
         const data = await response.json();
 
-        if (searchId !== currentSearch) {
+        if (
+            searchId !== currentSearch ||
+            soundRequestId !== currentSoundRequest
+        ) {
             return;
         }
-        
+
         const soundObservation = data.results.find(
             observation =>
                 observation.sounds?.some(
@@ -405,16 +417,14 @@ async function searchBirdSound(taxonId, searchId) {
         playAudioButton.disabled = false;
         playAudioButton.textContent = "▶ Play Bird Call";
 
-        console.log("Bird sound loaded:", sound.file_url);
-        console.log(
-            "Sound observation:",
-            "https://www.inaturalist.org/observations/"
-            + soundObservation.id
-        );
+        console.log("Bird sound:", sound.file_url);
 
     } catch (error) {
 
-        if (searchId !== currentSearch) {
+        if (
+            searchId !== currentSearch ||
+            soundRequestId !== currentSoundRequest
+        ) {
             return;
         }
 
@@ -422,7 +432,6 @@ async function searchBirdSound(taxonId, searchId) {
 
         playAudioButton.disabled = true;
         playAudioButton.textContent = "Bird Call Unavailable";
-
     }
 }
 

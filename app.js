@@ -94,6 +94,9 @@ async function searchBird(search) {
         //the place id for humboldt county is 1247
         + (checkboxFilter.checked ? "&place_id=1247" : "");
 
+        //debugging
+    console.log(url);
+    
     try {
 
         const response = await fetch(url);

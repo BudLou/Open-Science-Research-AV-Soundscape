@@ -100,6 +100,13 @@ async function searchBird(search) {
 
         const data = await response.json();
 
+        //fix to no sounds being found
+        console.log("Sound search taxon ID:", taxonId);
+        console.log("Sound API URL:", url);
+        console.log("Total sound observations:", data.total_results);
+        console.log("First sound observation:", data.results[0]);
+        console.log("Sounds array:", data.results[0]?.sounds);
+
         if (searchId !== currentSearch) {
             return;
         }
@@ -398,7 +405,7 @@ async function searchBirdSound(taxonId, searchId) {
         const soundObservation = data.results.find(
             observation =>
                 observation.sounds?.some(
-                    sound => sound.file_url
+                    sound => sound.file_url || sound.url
                 )
         );
 
@@ -408,9 +415,12 @@ async function searchBirdSound(taxonId, searchId) {
         }
 
         const sound = soundObservation.sounds.find(
-            sound => sound.file_url
+            sound => sound.file_url || sound.url
         );
 
+        const audioUrl = sound.file_url || sound.url;
+        console.log("Selected audio URL:", audioUrl);
+        
         birdAudio.src = sound.file_url;
         birdAudio.load();
 

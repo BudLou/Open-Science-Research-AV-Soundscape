@@ -54,10 +54,18 @@ searchForm.addEventListener("submit", function(event) {
 
 });
 
+
 // Check for a search sent from the homepage
 const urlParams = new URLSearchParams(window.location.search);
 
 const homepageSearch = urlParams.get("search");
+
+// NEW: Check whether the Humboldt filter was selected in the gallery
+const humboldtFilter = urlParams.get("humboldt");
+
+if (humboldtFilter === "true") {
+    checkboxFilter.checked = true;
+}
 
 if (homepageSearch && homepageSearch.trim() !== "") {
 
@@ -96,7 +104,7 @@ async function searchBird(search) {
 
         //debugging
     console.log(url);
-    
+
     try {
 
         const response = await fetch(url);
@@ -182,7 +190,7 @@ function displayBirdResults(observations) {
             "medium"
         );
 
- 
+
         const commonName =
             observation.taxon?.preferred_common_name
             || observation.species_guess
@@ -291,7 +299,7 @@ function selectBird(observation) {
     const description =
         observation.description
         || "No description provided for this observation.";
-  
+
     birdDescription.textContent =
         description
         + "\n\nObserved: " + date
@@ -310,7 +318,7 @@ function selectBird(observation) {
 
     playAudioButton.disabled = true;
 
-     const taxonId = observation.taxon?.id;
+    const taxonId = observation.taxon?.id;
 
     if (taxonId) {
         searchBirdSound(taxonId, currentSearch);
@@ -387,6 +395,7 @@ async function searchBirdSound(taxonId, searchId) {
         + "&per_page=20";
 
     try {
+
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -427,7 +436,7 @@ async function searchBirdSound(taxonId, searchId) {
 
         const audioUrl = sound.file_url || sound.url;
         console.log("Selected audio URL:", audioUrl);
-        
+
         birdAudio.src = audioUrl;
         birdAudio.load();
 
@@ -451,4 +460,3 @@ async function searchBirdSound(taxonId, searchId) {
         playAudioButton.textContent = "Bird Call Unavailable";
     }
 }
-

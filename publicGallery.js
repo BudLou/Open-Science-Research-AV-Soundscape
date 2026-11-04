@@ -223,7 +223,8 @@ gallerySearch.addEventListener("keydown", function(event) {
         if (searchName !== "") {
 
             window.location.href =
-                "birdSummary.html?search=" + encodeURIComponent(searchName);
+                "birdSummary.html?search=" + encodeURIComponent(searchName)
+                + "&humboldt=" + humboldtFilter.checked;
 
         }
 

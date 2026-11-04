@@ -54,6 +54,18 @@ searchForm.addEventListener("submit", function(event) {
 
 });
 
+//this function reloads the search if there is something in the search bar and the county button is clicked/unclicked
+checkboxFilter.addEventListener("change", function() {
+
+    const search = searchInput.value.trim();
+
+    if (search !== "") {
+
+        searchBird(search);
+
+    }
+
+});
 
 // Check for a search sent from the homepage
 const urlParams = new URLSearchParams(window.location.search);

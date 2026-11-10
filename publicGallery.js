@@ -1,5 +1,10 @@
 
-import { user, taxonIds, saveData } from "./firebase.js";
+import {
+    getUser,
+    getTaxonIds,
+    saveData,
+    onUserDataChange
+} from "./firebaseAuth.js";
 
 // HTML ELEMENTS
 const birdResults = document.getElementById("bird-results");
@@ -108,7 +113,10 @@ function createBirdCard(bird) {
     //if the card is clicked, go to birdSummary
     card.addEventListener("click", function() {
         const birdName = bird.preferred_common_name;
-        window.location.href = "birdSummary.html?search=" + encodeURIComponent(birdName);
+
+        window.location.href =
+            "birdSummary.html?search=" + encodeURIComponent(birdName)
+            + "&humboldt=" + humboldtFilter.checked;
     });
 
     birdResults.appendChild(card);
@@ -118,16 +126,19 @@ function createBirdCard(bird) {
 function createSaveButton(bird) {
     const button = document.createElement("button");
     button.className = "save-bird-button";
-    button.textContent = taxonIds.includes(bird.id) ? "Saved" : "Save";
+    button.dataset.taxonId = bird.id;
+
+    updateSaveButton(button);
 
     button.addEventListener("click", async function(event) {
         event.stopPropagation();
 
-        if (!user) {
-            button.textContent = "Sign in first";
+        if (!getUser()) {
+            button.textContent = "Sign in to save";
             return;
         }
 
+        const taxonIds = getTaxonIds();
         const index = taxonIds.indexOf(bird.id);
         const wasSaved = index !== -1;
 
@@ -139,7 +150,7 @@ function createSaveButton(bird) {
             taxonIds.push(bird.id);
         }
 
-        button.textContent = wasSaved ? "Save" : "Saved";
+        updateSaveButton(button);
 
         try {
             await saveData();
@@ -151,14 +162,29 @@ function createSaveButton(bird) {
                 taxonIds.push(bird.id);
             }
             else {
-                taxonIds.splice(taxonIds.indexOf(bird.id), 1);
+                const newIndex = taxonIds.indexOf(bird.id);
+                if (newIndex !== -1) taxonIds.splice(newIndex, 1);
             }
 
-            button.textContent = wasSaved ? "Saved" : "Save";
+            updateSaveButton(button);
         }
     });
 
     return button;
+}
+
+//update save button text
+function updateSaveButton(button) {
+    const id = Number(button.dataset.taxonId);
+
+    if (!getUser()) {
+        button.textContent = "Sign in to save";
+    }
+    else {
+        button.textContent = getTaxonIds().includes(id)
+            ? "Saved"
+            : "Save";
+    }
 }
 
 //button to load more birds
@@ -196,6 +222,13 @@ gallerySearch.addEventListener("keydown", function(event) {
                 + "&humboldt=" + humboldtFilter.checked;
         }
     }
+});
+
+//update save buttons when login state or saved birds change
+onUserDataChange(() => {
+    document.querySelectorAll(".save-bird-button").forEach(button => {
+        updateSaveButton(button);
+    });
 });
 
 //load on page startup

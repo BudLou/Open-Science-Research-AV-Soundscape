@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AV Soundscape</title>
+
+    <link rel="stylesheet" href="gallery.css">
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside id="sidebar">
+
+        <header id="site-title">
+            AV-SOUNDSCAPE
+        </header>
+
+
+        <!-- SEARCH -->
+
+        <section
+            id="search-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Search
+            </h2>
+
+            <input
+                id="gallery-search"
+                class="account-button"
+                type="text"
+                placeholder="Species or Name"
+            >
+
+        </section>
+
+
+        <!-- FAMILY FILTERS -->
+
+        <section
+            id="family-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Families
+            </h2>
+
+            <div id="family-list">
+                <!-- JavaScript inserts filters here -->
+            </div>
+
+        </section>
+
+
+        <!-- Humboldt FILTER -->
+
+        <section
+            id="filter-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Filters
+            </h2>
+
+            <div class="filter-row">
+
+                <label for="humboldt-filter">
+                    Humboldt County
+                </label>
+
+                <input
+                    id="humboldt-filter"
+                    type="checkbox"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNT -->
+
+        <section
+            id="account-section"
+            class="sidebar-section"
+        >
+
+            <h2 class="sidebar-heading">
+                Google User Profile
+            </h2>
+
+            <p id="login-status" class="account-button">Logged Out</p>
+
+            <button
+                id="collection-button"
+                class="account-button"
+                type="button"
+                onclick="window.location.href='privateGallery.html'"
+            >
+                My Collection
+            </button>
+
+            <button
+                id="gallery-button"
+                class="account-button"
+                type="button"
+                onclick="window.location.href='publicGallery.html'"
+            >
+                Gallery
+            </button>
+
+            <button
+                id="sign-in-out-button"
+                class="account-button"
+                type="button"
+            >
+                Sign In
+            </button>
+
+        </section>
+
+    </aside>
+
+
+            <!-- BIRD GALLERY -->
+
+    <main id="gallery-content">
+
+        <header id="gallery-header">
+            <h1>Bird Gallery</h1>
+            <p id="gallery-description">
+            Explore bird species from around the world.
+            </p>
+        </header>
+
+        <div id="gallery-loading">
+            Loading birds...
+        </div>
+
+        <div id="gallery-error">
+            Unable to load birds. Please try again.
+        </div>
+
+        <div id="gallery-empty">
+            No birds found.
+        </div>
+
+        <div id="bird-results">
+            <!-- JavaScript inserts bird cards here -->
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script type="module" src="publicGallery.js"></script>
+<script type="module" src="./goToLogin.js"></script>
+
+</body>
+
+</html>

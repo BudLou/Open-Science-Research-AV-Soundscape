@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cal-Poly Humboldt AV-Soundscape</title>
+    <title>AV Soundscape</title>
 
     <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
 
-    <!-- Sign-in link in the top-right corner -->
+    <!-- Sign-in link -->
     <a href="./loginPage.html" class="sign-in">
-        <span class="sign-in-icon">◎</span>
+        <span class="sign-in-icon"> <img src="https://www.google.com/favicon.ico" alt="Google logo"> </span>
         <span>Sign in</span>
     </a>
 
@@ -24,18 +24,22 @@
         <p>Discover Birds and their calls here!</p>
     </header>
 
-    <!-- Main content -->
     <main>
 
-        <!-- Blue jay image -->
+        <!-- Bird image -->
         <img
             src="./images/blue-jay.jpg"
             alt="Blue jay perched on a branch"
             class="bird-image"
         >
 
-        <!-- Bird search bar -->
-        <form class="search-form" action="#" method="get">
+        <!-- Bird search form -->
+        <form
+            class="search-form"
+            id="birdSearchForm"
+            action="./birdSummary.html"
+            method="get"
+        >
 
             <span class="search-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
@@ -46,44 +50,52 @@
 
             <input
                 type="text"
-                name="bird"
-                placeholder="Search"
+                id="birdSearchInput"
+                name="search"
+                placeholder="Search for a bird..."
                 aria-label="Search for a bird species"
+                required
             >
 
             <button
-                type="button"
-                class="mic-button"
-                aria-label="Voice search"
-                title="Voice search"
+                type="submit"
+                class="search-button"
+                aria-label="Search"
+                title="Search"
             >
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="9" y="2" width="6" height="13" rx="3"></rect>
-                    <path d="M5 11a7 7 0 0 0 14 0"></path>
-                    <path d="M12 18v4M9 22h6"></path>
+                    <circle cx="10.5" cy="10.5" r="6.5"></circle>
+                    <path d="M15.5 15.5L21 21"></path>
                 </svg>
             </button>
 
         </form>
 
-        <!-- Homepage navigation buttons -->
+        <!-- Homepage action buttons -->
         <div class="button-container">
 
             <button
                 type="button"
-                onclick="window.location.href='./loginPage.html'"
-            >
-                Enter
-            </button>
+                id="galleryButton"
+                onclick="window.location.href='./publicGallery.html'"
+            >Gallery</button>
 
             <button
                 type="button"
-                onclick="window.location.href='./loginPage.html'"
+                id="guessingGameButton"
+                onclick="window.location.href='./birdGame.html'"
             >
-                Field Challenge
+                Guessing Game
             </button>
 
         </div>
+
+        <!-- Search message -->
+        <p
+            id="searchMessage"
+            class="search-message"
+            aria-live="polite"
+        ></p>
 
     </main>
 

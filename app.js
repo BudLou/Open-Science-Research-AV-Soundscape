@@ -26,6 +26,8 @@ const birdStatus = document.getElementById("bird-status");
 const birdAudio = document.getElementById("bird-audio");
 const playAudioButton = document.getElementById("play-audio-button");
 
+//variable for checkbox for humboldt filter
+const checkboxFilter = document.getElementById("humboldt-filter");
 
 loadingMessage.style.display = "none";
 errorMessage.style.display = "none";
@@ -52,6 +54,41 @@ searchForm.addEventListener("submit", function(event) {
 
 });
 
+//this function reloads the search if there is something in the search bar and the county button is clicked/unclicked
+checkboxFilter.addEventListener("change", function() {
+
+    const search = searchInput.value.trim();
+
+    if (search !== "") {
+
+        searchBird(search);
+
+    }
+
+});
+
+// Check for a search sent from the homepage
+const urlParams = new URLSearchParams(window.location.search);
+
+const homepageSearch = urlParams.get("search");
+
+// NEW: Check whether the Humboldt filter was selected in the gallery
+const humboldtFilter = urlParams.get("humboldt");
+
+if (humboldtFilter === "true") {
+    checkboxFilter.checked = true;
+}
+
+if (homepageSearch && homepageSearch.trim() !== "") {
+
+    // Display the search in the sidebar
+    searchInput.value = homepageSearch;
+
+    // Run the existing search function
+    searchBird(homepageSearch.trim());
+
+}
+
 
 async function searchBird(search) {
 
@@ -73,7 +110,12 @@ async function searchBird(search) {
         + "?taxon_name=" + encodeURIComponent(search)
         + "&taxon_id=3"
         + "&photos=true"
-        + "&per_page=20";
+        + "&per_page=20"
+        //the place id for humboldt county is 1247
+        + (checkboxFilter.checked ? "&place_id=1247" : "");
+
+        //debugging
+    console.log(url);
 
     try {
 
@@ -160,7 +202,7 @@ function displayBirdResults(observations) {
             "medium"
         );
 
- 
+
         const commonName =
             observation.taxon?.preferred_common_name
             || observation.species_guess
@@ -269,7 +311,7 @@ function selectBird(observation) {
     const description =
         observation.description
         || "No description provided for this observation.";
-  
+
     birdDescription.textContent =
         description
         + "\n\nObserved: " + date
@@ -287,6 +329,15 @@ function selectBird(observation) {
     birdAudio.load();
 
     playAudioButton.disabled = true;
+
+    const taxonId = observation.taxon?.id;
+
+    if (taxonId) {
+        searchBirdSound(taxonId, currentSearch);
+    } else {
+        playAudioButton.disabled = true;
+        playAudioButton.textContent = "No Bird Call Available";
+    }
 
 }
 
@@ -336,4 +387,88 @@ function clearSelectedBird() {
 
     playAudioButton.disabled = true;
     playAudioButton.textContent = "▶ Play Bird Call";
+}
+
+//must be here to prevent overwrites
+let currentSoundRequest = 0;
+
+async function searchBirdSound(taxonId, searchId) {
+
+
+    const soundRequestId = ++currentSoundRequest;
+
+    playAudioButton.disabled = true;
+    playAudioButton.textContent = "Loading Bird Call...";
+
+    const url =
+        "https://api.inaturalist.org/v1/observations"
+        + "?taxon_id=" + encodeURIComponent(taxonId)
+        + "&sounds=true"
+        + "&per_page=20";
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Unable to retrieve bird sounds");
+        }
+
+        const data = await response.json();
+
+        //do not remove; debugged the first time it messed up, and I am not sure if it will run correctly without (might change later)
+        console.log("Sound search taxon ID:", taxonId);
+        console.log("Sound API URL:", url);
+        console.log("Total sound observations:", data.total_results);
+        console.log("First sound observation:", data.results[0]);
+        console.log("Sounds array:", data.results[0]?.sounds);
+
+        if (
+            searchId !== currentSearch ||
+            soundRequestId !== currentSoundRequest
+        ) {
+            return;
+        }
+
+        const soundObservation = data.results.find(
+            observation =>
+                observation.sounds?.some(
+                    sound => sound.file_url || sound.url
+                )
+        );
+
+        if (!soundObservation) {
+            playAudioButton.textContent = "No Bird Call Available";
+            return;
+        }
+
+        const sound = soundObservation.sounds.find(
+            sound => sound.file_url || sound.url
+        );
+
+        const audioUrl = sound.file_url || sound.url;
+        console.log("Selected audio URL:", audioUrl);
+
+        birdAudio.src = audioUrl;
+        birdAudio.load();
+
+        playAudioButton.disabled = false;
+        playAudioButton.textContent = "▶ Play Bird Call";
+
+        console.log("Bird sound:", sound.file_url);
+
+    } catch (error) {
+
+        if (
+            searchId !== currentSearch ||
+            soundRequestId !== currentSoundRequest
+        ) {
+            return;
+        }
+
+        console.error("Bird sound error:", error);
+
+        playAudioButton.disabled = true;
+        playAudioButton.textContent = "Bird Call Unavailable";
+    }
 }

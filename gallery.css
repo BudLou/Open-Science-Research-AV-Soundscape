@@ -1,0 +1,257 @@
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+
+    background-color: #e5f1dc;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* =========================================
+   MAIN APPLICATION LAYOUT
+========================================= */
+
+#app {
+    display: grid;
+
+    grid-template-columns: 170px 1fr;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid #555;
+}
+
+#site-title {
+    height: 155px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid #555;
+
+    font-size: 23px;
+}
+
+.sidebar-section {
+    padding: 10px;
+
+    border-bottom: 1px solid #777;
+}
+
+.sidebar-heading {
+    margin: 0 0 8px 0;
+
+    font-size: 13px;
+    font-weight: normal;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+#search-form {
+    width: 100%;
+}
+
+#bird-search {
+    width: 100%;
+
+    padding: 8px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    background-color: white;
+}
+
+#bird-search:focus {
+    outline: 2px solid #367c39;
+    outline-offset: 2px;
+}
+
+
+/* =========================================
+   FAMILY FILTERS
+========================================= */
+
+#family-section {
+    min-height: 195px;
+}
+
+#family-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.family-filter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   AUDIO FILTER
+========================================= */
+
+#filter-section {
+    min-height: 135px;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+#account-section {
+    margin-top: auto;
+}
+
+.account-button {
+    width: 100%;
+
+    margin: 5px 0;
+    padding: 8px;
+
+    text-align: left;
+
+    background-color: transparent;
+
+    border: 1px solid #aaa;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+#bird-results {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.bird-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.bird-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.account-button:hover {
+    background-color: #d4e7c8;
+}
+
+
+#load-more-button {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 28px;
+    background-color: #557c50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#load-more-button:hover {
+    background-color: #3f633b;
+}
+
+#load-more-button:active {
+    transform: scale(0.97);
+}
+
+/* =========================================
+   SAVE BIRD BUTTON
+========================================= */
+
+.save-bird-button {
+    display: block;
+    width: 80%;
+    margin: 12px auto 2px;
+    padding: 9px 12px;
+
+    background-color: #557c50;
+    color: white;
+
+    border: none;
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.save-bird-button:hover {
+    background-color: #3f633b;
+}
+
+.save-bird-button:active {
+    transform: scale(0.97);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 800px) {
+
+    #app {
+        grid-template-columns: 130px 1fr;
+    }
+
+}

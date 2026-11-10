@@ -1,82 +1,187 @@
-
+/* General page styling */
+* {
+    box-sizing: border-box;
+}
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333333;
+    background-color: #e0eed8;
+    color: #000000;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
-
-
-
+/* Main page */
 main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Top navigation bar */
+.top-bar {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 0 12px;
+    border-bottom: 1px solid #555555;
+}
+
+/* Progress and score */
+.top-bar p {
+    margin: 0;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+/* Difficulty section */
+.difficulty-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+/* Difficulty dropdown */
+#difficulty {
+    padding: 5px 10px;
+    border: 1px solid #000000;
+    border-radius: 4px;
     background-color: #ffffff;
-    border-radius: 8px;
+    font-size: 14px;
 }
 
-
-/*game title */
-h1 {
-    text-align: center;
+/* Restart button */
+#restart {
+    background: none;
+    border: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 6px;
 }
 
-
-
-
-h2 {
-    text-align: center;
+/* Main game layout */
+#game.game-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 35px;
+    width: 100%;
+    height: calc(100vh - 50px);
+    padding: 15px;
 }
 
-
-/*dropdown */
-select {
-    padding: 5px;
-    margin-left: 5px;
+/* Left bird section */
+.bird-section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
 }
-
-
-/* Round and score information */
-p {
-    line-height: 1.5;
-}
-
 
 /* Bird image */
 #birdImage {
     display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 20px auto;
+    width: 100%;
+    height: min(72vh, 530px);
+    object-fit: contain;
+    margin: 0;
 }
 
-
-/* Game section */
-#game {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #cccccc;
-    border-radius: 8px;
-}
-
-
-/* Answer choices container */
-#answers {
-    margin: 15px 0;
-}
-
-
-/* Buttons */
-button {
-    padding: 10px 15px;
-    margin: 5px;
+/* Play call button */
+#listen {
+    width: 145px;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ade5ff;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    text-align: left;
     cursor: pointer;
 }
 
+/* Disabled audio button */
+#listen:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Right answer section */
+.answer-section {
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+}
+
+/* Game question */
+.answer-section h1 {
+    text-align: left;
+    font-size: clamp(20px, 2vw, 25px);
+    font-weight: normal;
+    margin: 0 0 35px 0;
+}
+
+/* Answer choices */
+#answers {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    max-width: 385px;
+    margin: 0;
+}
+
+/* Answer buttons */
+.answer {
+    display: block;
+    width: 200%;
+    padding: 7px;
+    background-color: #ffdbad;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    font-family: Arial, sans-serif;
+    font-size: clamp(16px, 1.7vw, 23px);
+    text-align: left;
+    cursor: pointer;
+}
+
+/* Answer hover */
+.answer:hover {
+    background-color: #ffc987;
+}
+
+/* Correct answer */
+.correct-answer {
+    background-color: #a8d5a2;
+}
+
+/* Incorrect answer */
+.wrong-answer {
+    background-color: #edaaaa;
+}
+
+/* Feedback message */
+#feedback {
+    min-height: 24px;
+    margin-top: 20px;
+}
+
+/* Next bird button */
+#next {
+    padding: 9px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #ffdbad;
+    cursor: pointer;
+}
 
 /* Disabled buttons */
 button:disabled {
@@ -84,23 +189,99 @@ button:disabled {
     opacity: 0.5;
 }
 
-
-/* Feedback message */
-#feedback {
-    min-height: 24px;
-}
-
-
-/* End-of-game section */
+/* End game section */
 #end {
-    margin-top: 20px;
-    padding: 15px;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 15px;
     text-align: center;
 }
 
-
-/* Restart and play again buttons */
-#restart,
+/* Play again button */
 #playAgain {
-    margin: 10px;
+    width: 100%;
+    max-width: 300px;
+    background-color: #ade5ff;
+    margin: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Smaller screens, only if we plan to do a 
+mobile app probably not */ 
+@media screen and (max-width: 700px) {
+
+    .top-bar {
+        gap: 5px;
+        padding: 0 6px;
+    }
+
+    .top-bar p {
+        font-size: 12px;
+    }
+
+    .difficulty-section {
+        gap: 3px;
+        font-size: 12px;
+    }
+
+    #difficulty {
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    #back {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #d4e8cf;
+    cursor: pointer;
+    font-size: 14px;
+
+    }
+
+    #back:hover {
+        background-color: #b9d5b2;
+    }
+
+    #restart {
+        font-size: 13px;
+    }
+
+    #game.game-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .bird-section {
+        height: auto;
+    }
+
+    #birdImage {
+        height: auto;
+        max-height: 45vh;
+    }
+
+    .answer-section {
+        padding: 10px;
+    }
+
+    .answer-section h1 {
+        margin-bottom: 20px;
+    }
+
+    #answers {
+        max-width: 100%;
+        gap: 12px;
+    }
+
 }

@@ -70,6 +70,7 @@ let audioContext = null;
 let best = Number(sessionStorage.getItem("bestScore") || 0
 );
 
+
 // Displays the saved best score on the webpage.
 $("best").textContent = best;
 

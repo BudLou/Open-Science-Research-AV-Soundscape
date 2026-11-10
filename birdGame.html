@@ -1,67 +1,108 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Bird Guessing Game</title>
+
     <link rel="stylesheet" href="testGame.css">
-    <script src="gametest.js" defer></script>
+    <script src="gamelogic.js" defer></script>
 </head>
+
 <body>
+
     <main>
-        <h1>Bird Guessing Game</h1>
 
+        <!-- Top navigation bar -->
+        <header class="top-bar">
 
-        <label for="difficulty">Difficulty:</label>
-        <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-        </select>
+            <p id="progress">0 / 6</p>
 
+            <div class="difficulty-section">
+                <label for="difficulty">Difficulty:</label>
 
-        <p>Round: <span id="progress">0 / 6</span></p>
-        <p>Score: <span id="score">0</span></p>
-        <p>Correct: <span id="correct">0</span></p>
-        <p>Incorrect: <span id="incorrect">0</span></p>
-        <p>Best Score: <span id="best">0</span></p>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
 
+            <button id="back" type="button">
+                 ← Back
+            </button>
 
-        <section id="game">
-            <h2>Identify this bird</h2>
-            <p id="specimen"></p>
+            <button id="restart" type="button">
+                &#8635; Restart
+            </button>
 
+            <p class="score-display">
+                Score - <span id="score">0</span>
+            </p>
 
-            <img
-                id="birdImage"
-                src=""
-                alt="Bird to identify"
-                width="300"
-            >
+        </header>
 
+        <!-- Main game area -->
+        <section id="game" class="game-container">
 
-            <div id="answers"></div>
+            <!-- Left side: Bird picture -->
+            <div class="bird-section">
 
+                <p id="specimen" hidden></p>
 
-            <p id="feedback" class="feedback"></p>
+                <img
+                    id="birdImage"
+                    src=""
+                    alt="Bird to identify"
+                >
 
+                <button id="listen" type="button" disabled>
+                    &#9654; Play Bird Call
+                </button>
 
-            <button id="listen" type="button"> Hear Bird Call </button>
+            </div>
 
+            <!-- Right side: Question and answers -->
+            <div class="answer-section">
 
-            <button id="next" type="button" disabled> Next Bird </button>
+                <h1>Identify this Bird</h1>
+
+                <div id="answers" class="answers-container">
+                    <!-- JavaScript creates answer buttons here -->
+                </div>
+
+                <p id="feedback" class="feedback"></p>
+
+                <button id="next" type="button" disabled>
+                    Next Bird
+                </button>
+
+            </div>
+
         </section>
 
-
+        <!-- Game completion screen -->
         <section id="end" style="display: none;">
-            <h2>Game Complete!</h2>
+
+            <h1>Game Complete!</h1>
+
             <p id="summary"></p>
-            <button id="restart" type="button">Play Again</button>
-            <button id="playAgain" type="button">Restart Game</button>
+
+            <button id="playAgain" type="button">
+                Play Again
+            </button>
+
         </section>
+
+        <!-- Hidden score information -->
+        <div hidden>
+            <span id="correct">0</span>
+            <span id="incorrect">0</span>
+            <span id="best">0</span>
+        </div>
+
     </main>
+
 </body>
 </html>
-

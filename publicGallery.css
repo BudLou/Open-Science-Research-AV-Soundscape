@@ -213,6 +213,38 @@ input {
 }
 
 /* =========================================
+   SAVE BIRD BUTTON
+========================================= */
+
+.save-bird-button {
+    display: block;
+    width: 80%;
+    margin: 12px auto 2px;
+    padding: 9px 12px;
+
+    background-color: #557c50;
+    color: white;
+
+    border: none;
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.save-bird-button:hover {
+    background-color: #3f633b;
+}
+
+.save-bird-button:active {
+    transform: scale(0.97);
+}
+
+/* =========================================
    RESPONSIVE DESIGN
 ========================================= */
 

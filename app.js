@@ -39,6 +39,18 @@ let previousSearches = [];
 
 let currentSearch = 0;
 
+const showMoreButton = document.getElementById("show-more-button");
+
+let currentPage = 1;
+let currentBirdSearch = "";
+let totalObservations = 0;
+let loadedObservations = 0;
+let isLoadingMore = false;
+
+const resultsPerPage = 20;
+
+showMoreButton.hidden = true;
+
 
 searchForm.addEventListener("submit", function(event) {
 
@@ -93,6 +105,15 @@ if (homepageSearch && homepageSearch.trim() !== "") {
 async function searchBird(search) {
 
     const searchId = ++currentSearch;
+    currentPage = 1;
+    currentBirdSearch = search;
+    totalObservations = 0;
+    loadedObservations = 0;
+    isLoadingMore = false;
+
+    showMoreButton.hidden = true;
+    showMoreButton.disabled = false;
+    showMoreButton.textContent = "Show More";
 
     loadingMessage.style.display = "block";
 
@@ -110,7 +131,8 @@ async function searchBird(search) {
         + "?taxon_name=" + encodeURIComponent(search)
         + "&taxon_id=3"
         + "&photos=true"
-        + "&per_page=20"
+        + "&per_page=" + resultsPerPage
+        + "&page=" + currentPage;
         //the place id for humboldt county is 1247
         + (checkboxFilter.checked ? "&place_id=1247" : "");
 
@@ -147,13 +169,20 @@ async function searchBird(search) {
             previousSearches.push(search);
         }
 
-        resultCount.textContent =
-            data.total_results
-            + " observations found for "
-            + search
-            + ". Showing up to 20.";
+        totalObservations = data.total_results;
+        loadedObservations = data.results.length;
 
+        resultCount.textContent =
+            "Showing " + loadedObservations
+            + " of " + totalObservations
+            + " observations for " + search;
+
+        // Display first 20 results
         displayBirdResults(data.results);
+
+        // Show button if more results are available
+        showMoreButton.hidden =
+            loadedObservations >= totalObservations;
 
         const firstBird = data.results.find(
             observation => observation.photos?.length > 0
@@ -184,8 +213,8 @@ async function searchBird(search) {
 
 function displayBirdResults(observations) {
 
-
-    birdResults.replaceChildren();
+    //replacing the delete do not add a delete function
+    observations.forEach(function(observation) {
 
 
     observations.forEach(function(observation) {
@@ -505,3 +534,92 @@ function searchHumboldtArticles(commonName, scientificName) {
     link2.hidden = false;
 }
 
+//Load more option
+showMoreButton.addEventListener("click", loadMoreBirds);
+
+async function loadMoreBirds() {
+
+    // Prevent multiple requests
+    if (isLoadingMore) {
+        return;
+    }
+
+    if (loadedObservations >= totalObservations) {
+        showMoreButton.hidden = true;
+        return;
+    }
+
+    isLoadingMore = true;
+
+    showMoreButton.disabled = true;
+    showMoreButton.textContent = "Loading...";
+
+    const searchId = currentSearch;
+    const nextPage = currentPage + 1;
+
+    const url =
+        "https://api.inaturalist.org/v1/observations"
+        + "?taxon_name="
+        + encodeURIComponent(currentBirdSearch)
+        + "&taxon_id=3"
+        + "&photos=true"
+        + "&per_page=" + resultsPerPage
+        + "&page=" + nextPage;
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Unable to load more observations");
+        }
+
+        const data = await response.json();
+
+        // Ignore results if the user started a new search
+        if (searchId !== currentSearch) {
+            return;
+        }
+
+        currentPage = nextPage;
+
+        displayBirdResults(data.results);
+
+        loadedObservations += data.results.length;
+
+        resultCount.textContent =
+            "Showing " + loadedObservations
+            + " of " + totalObservations
+            + " observations for "
+            + currentBirdSearch;
+
+        if (
+            loadedObservations >= totalObservations ||
+            data.results.length === 0
+        ) {
+            showMoreButton.hidden = true;
+        }
+
+    } catch (error) {
+
+        if (searchId !== currentSearch) {
+            return;
+        }
+
+        console.error("Load more error:", error);
+
+        showMoreButton.textContent = "Try Again";
+
+    } finally {
+
+        if (searchId === currentSearch) {
+            isLoadingMore = false;
+            showMoreButton.disabled = false;
+
+            if (showMoreButton.textContent !== "Try Again") {
+                showMoreButton.textContent = "Show More";
+            }
+        }
+
+    }
+}

@@ -520,4 +520,38 @@ input {
    #bird-articles a[hidden] {
        display: none;
    }
+
+   #show-more-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+//Show more button on results of bird summaries
+//PLEASE LOOK OVER AND CHANGE IF WANTED
+#show-more-button {
+    padding: 12px 30px;
+
+    background-color: #367c39;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#show-more-button:hover:not(:disabled) {
+    background-color: #285e2b;
+}
+
+#show-more-button:disabled {
+    background-color: #999;
+    cursor: wait;
+}
+
+#show-more-button[hidden] {
+    display: none;
+}
 }

@@ -39,7 +39,8 @@ let previousSearches = [];
 
 let currentSearch = 0;
 
-const showMoreButton = document.getElementById("show-more-button");
+const showMoreButton = 
+    document.getElementById("show-more-button");
 
 let currentPage = 1;
 let currentBirdSearch = "";

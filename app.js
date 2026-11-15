@@ -133,7 +133,8 @@ async function searchBird(search) {
         + "&taxon_id=3"
         + "&photos=true"
         + "&per_page=" + resultsPerPage
-        + "&page=" + currentPage;
+        + "&page=" + currentPage
+    + (checkboxFilter.checked ? "&place_id=1247" : "");
         //the place id for humboldt county is 1247
         + (checkboxFilter.checked ? "&place_id=1247" : "");
 
@@ -215,9 +216,6 @@ async function searchBird(search) {
 function displayBirdResults(observations) {
 
     //replacing the delete do not add a delete function
-    observations.forEach(function(observation) {
-
-
     observations.forEach(function(observation) {
 
         if (!observation.photos?.length) {
@@ -558,14 +556,15 @@ async function loadMoreBirds() {
     const searchId = currentSearch;
     const nextPage = currentPage + 1;
 
-    const url =
+   const url =
         "https://api.inaturalist.org/v1/observations"
         + "?taxon_name="
         + encodeURIComponent(currentBirdSearch)
         + "&taxon_id=3"
         + "&photos=true"
         + "&per_page=" + resultsPerPage
-        + "&page=" + nextPage;
+        + "&page=" + nextPage
+        + (checkboxFilter.checked ? "&place_id=1247" : "");
 
     try {
 

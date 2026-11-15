@@ -276,6 +276,7 @@ function selectBird(observation) {
 
     birdCommonName.textContent = commonName;
     birdScientificName.textContent = scientificName;
+    searchHumboldtArticles(commonName, scientificName);
 
     if (observation.photos?.length > 0) {
 
@@ -365,6 +366,9 @@ playAudioButton.addEventListener("click", function() {
 
 
 function clearSelectedBird() {
+
+    document.getElementById("article-link-1").hidden = true;
+    document.getElementById("article-link-2").hidden = true;
 
     birdImage.removeAttribute("src");
     birdImage.style.display = "none";
@@ -472,3 +476,32 @@ async function searchBirdSound(taxonId, searchId) {
         playAudioButton.textContent = "Bird Call Unavailable";
     }
 }
+
+//Humboldt Digital Commons Search
+function searchHumboldtArticles(commonName, scientificName) {
+
+    const link1 = document.getElementById("article-link-1");
+    const link2 = document.getElementById("article-link-2");
+
+    const baseUrl =
+        "https://digitalcommons.humboldt.edu/do/search/";
+
+    const commonUrl =
+        baseUrl
+        + "?q=" + encodeURIComponent(commonName)
+        + "&start=0&context=1";
+
+    const scientificUrl =
+        baseUrl
+        + "?q=" + encodeURIComponent(scientificName)
+        + "&start=0&context=1";
+
+    link1.href = commonUrl;
+    link1.textContent = "Research: " + commonName;
+    link1.hidden = false;
+
+    link2.href = scientificUrl;
+    link2.textContent = "Research: " + scientificName;
+    link2.hidden = false;
+}
+

@@ -493,4 +493,31 @@ input {
        white-space: pre-line;
        overflow-wrap: anywhere;
    }
+
+
+   // Humboldt commons search results
+   //PLEASE EDIT THIS HOW YOU LIKE IT THIS IS JUST QUICK WORK
+
+      #bird-articles {
+       display: flex;
+       flex-direction: column;
+       gap: 8px;
+       margin: 0 10px 15px;
+   }
+   
+   #bird-articles h3 {
+       font-size: 14px;
+       margin: 0;
+   }
+   
+   #bird-articles a {
+       font-size: 12px;
+       color: #0066cc;
+       text-decoration: underline;
+       overflow-wrap: anywhere;
+   }
+   
+   #bird-articles a[hidden] {
+       display: none;
+   }
 }

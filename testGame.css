@@ -1,3 +1,4 @@
+
 /* General page styling */
 * {
     box-sizing: border-box;
@@ -5,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0eed8;
+    background-color: #e0ebd7;
     color: #000000;
     margin: 0;
     padding: 0;
@@ -17,6 +18,25 @@ main {
     min-height: 100vh;
 }
 
+/* Game title banner */
+.game-title {
+    width: 100%;
+    background-color: #557d50;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+}
+
+.game-title h1 {
+    font-size: 24px;
+    margin: 0 0 5px 0;
+}
+
+.game-title p {
+    font-size: 13px;
+    margin: 0;
+}
+
 /* Top navigation bar */
 .top-bar {
     height: 50px;
@@ -26,7 +46,8 @@ main {
     justify-content: space-between;
     gap: 15px;
     padding: 0 12px;
-    border-bottom: 1px solid #555555;
+    background-color: #b9d1a9;
+    border-bottom: 2px solid #557d50;
 }
 
 /* Progress and score */
@@ -47,20 +68,42 @@ main {
 /* Difficulty dropdown */
 #difficulty {
     padding: 5px 10px;
-    border: 1px solid #000000;
+    border: 1px solid #557d50;
     border-radius: 4px;
     background-color: #ffffff;
     font-size: 14px;
 }
 
+/* Back button */
+#back {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #557d50;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#back:hover {
+    background-color: #3f633c;
+}
+
 /* Restart button */
 #restart {
-    background: none;
+    background-color: #557d50;
+    color: #ffffff;
     border: none;
+    border-radius: 5px;
     font-family: Arial, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
-    padding: 6px;
+    padding: 8px 15px;
+}
+
+#restart:hover {
+    background-color: #3f633c;
 }
 
 /* Main game layout */
@@ -68,44 +111,54 @@ main {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
-    gap: 35px;
+    gap: 20px;
     width: 100%;
-    height: calc(100vh - 50px);
-    padding: 15px;
+    min-height: calc(100vh - 140px);
+    padding: 12px;
 }
 
 /* Left bird section */
 .bird-section {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-width: 0;
+    background-color: #b9d1a9;
+    border-radius: 8px;
+    padding: 15px;
 }
 
 /* Bird image */
 #birdImage {
     display: block;
     width: 100%;
-    height: min(72vh, 530px);
+    height: min(45vh, 350px);
     object-fit: contain;
     margin: 0;
+    border-radius: 6px;
+    background-color: #e0ebd7;
 }
 
 /* Play call button */
 #listen {
     width: 145px;
     margin-top: 12px;
-    padding: 8px 12px;
+    padding: 10px 12px;
     border: none;
-    border-radius: 20px;
-    background-color: #ade5ff;
+    border-radius: 5px;
+    background-color: #557d50;
+    color: #ffffff;
     font-family: Arial, sans-serif;
     font-size: 13px;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
+}
+
+#listen:hover:not(:disabled) {
+    background-color: #3f633c;
 }
 
 /* Disabled audio button */
@@ -118,22 +171,25 @@ main {
 .answer-section {
     width: 100%;
     min-width: 0;
-    padding: 15px;
+    padding: 20px;
+    background-color: #b9d1a9;
+    border-radius: 8px;
 }
 
 /* Game question */
 .answer-section h1 {
     text-align: left;
-    font-size: clamp(20px, 2vw, 25px);
-    font-weight: normal;
-    margin: 0 0 35px 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #315c35;
+    margin: 0 0 25px 0;
 }
 
 /* Answer choices */
 #answers {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px;
     width: 100%;
     max-width: 385px;
     margin: 0;
@@ -142,11 +198,12 @@ main {
 /* Answer buttons */
 .answer {
     display: block;
-    width: 200%;
-    padding: 7px;
-    background-color: #ffdbad;
-    border: 1px solid #555555;
-    border-radius: 3px;
+    width: 100%;
+    padding: 12px;
+    background-color: #557d50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
     font-family: Arial, sans-serif;
     font-size: clamp(16px, 1.7vw, 23px);
     text-align: left;
@@ -154,18 +211,20 @@ main {
 }
 
 /* Answer hover */
-.answer:hover {
-    background-color: #ffc987;
+.answer:hover:not(:disabled) {
+    background-color: #3f633c;
 }
 
 /* Correct answer */
 .correct-answer {
-    background-color: #a8d5a2;
+    background-color: #326b39;
+    color: #ffffff;
 }
 
 /* Incorrect answer */
 .wrong-answer {
-    background-color: #edaaaa;
+    background-color: #a94b4b;
+    color: #ffffff;
 }
 
 /* Feedback message */
@@ -176,11 +235,16 @@ main {
 
 /* Next bird button */
 #next {
-    padding: 9px 20px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 20px;
-    background-color: #ffdbad;
+    border-radius: 5px;
+    background-color: #557d50;
+    color: #ffffff;
     cursor: pointer;
+}
+
+#next:hover:not(:disabled) {
+    background-color: #3f633c;
 }
 
 /* Disabled buttons */
@@ -194,27 +258,39 @@ button:disabled {
     font-family: Arial, sans-serif;
     font-size: 20px;
     width: 100%;
-    height: 100%;
+    min-height: calc(100vh - 50px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 40px 15px;
     text-align: center;
+    background-color: #e0ebd7;
+}
+
+/* End game heading */
+#end h1 {
+    color: #315c35;
 }
 
 /* Play again button */
 #playAgain {
     width: 100%;
     max-width: 300px;
-    background-color: #ade5ff;
+    background-color: #557d50;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
     margin: 20px;
-    padding: 10px 20px;
+    padding: 12px 20px;
     cursor: pointer;
 }
 
-/* Smaller screens, only if we plan to do a 
-mobile app probably not */ 
+#playAgain:hover {
+    background-color: #3f633c;
+}
+
+/* Smaller screens */
 @media screen and (max-width: 700px) {
 
     .top-bar {
@@ -237,21 +313,13 @@ mobile app probably not */
     }
 
     #back {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 20px;
-    background-color: #d4e8cf;
-    cursor: pointer;
-    font-size: 14px;
-
-    }
-
-    #back:hover {
-        background-color: #b9d5b2;
+        padding: 6px 8px;
+        font-size: 12px;
     }
 
     #restart {
-        font-size: 13px;
+        padding: 6px 8px;
+        font-size: 12px;
     }
 
     #game.game-container {
@@ -264,6 +332,7 @@ mobile app probably not */
 
     .bird-section {
         height: auto;
+        padding: 10px;
     }
 
     #birdImage {
@@ -272,7 +341,7 @@ mobile app probably not */
     }
 
     .answer-section {
-        padding: 10px;
+        padding: 15px;
     }
 
     .answer-section h1 {
@@ -284,4 +353,7 @@ mobile app probably not */
         gap: 12px;
     }
 
+    .answer {
+        width: 100%;
+    }
 }

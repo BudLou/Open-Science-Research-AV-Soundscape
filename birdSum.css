@@ -40,37 +40,33 @@ input {
 ========================================= */
 
 #sidebar {
-    background-color: #b8d0a9;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    min-height: 90px;
-    border-right: none;
-    border-bottom: 1px solid #555;
-    padding: 0 15px;
+    flex-direction: column;
+
+    border-right: 1px solid #555;
 }
 
 #site-title {
-    height: 90px;
-    min-width: 220px;
-    padding: 0 25px;
+    height: 155px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: none;
-    border-right: 1px solid #555;
+
+    border-bottom: 1px solid #555;
+
     font-size: 23px;
 }
 
 .sidebar-section {
-    padding: 10px 15px;
-    border-bottom: none;
-    border-right: 1px solid #777;
+    padding: 10px;
+
+    border-bottom: 1px solid #777;
 }
 
 .sidebar-heading {
     margin: 0 0 8px 0;
+
     font-size: 13px;
     font-weight: normal;
 }
@@ -200,28 +196,19 @@ input {
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    min-width: 0;
-    height: 100%;
-    min-height: 0;
-
-    padding: 10px;
+    padding: 25px;
 
     border-right: 1px solid #555;
-
-   overflow: hidden;
 }
 
 #selected-bird-image {
     display: none;
 
     width: 100%;
-    max-width: 100%;
-    height: 100%;
-    max-height: 100%;
-   
+    max-width: 500px;
+    height: 270px;
 
-    object-fit: contain;
+    object-fit: cover;
 
     border-radius: 3px;
 }
@@ -506,65 +493,4 @@ input {
        white-space: pre-line;
        overflow-wrap: anywhere;
    }
-
-
-   // Humboldt commons search results
-   //PLEASE EDIT THIS HOW YOU LIKE IT THIS IS JUST QUICK WORK
-
-      #bird-articles {
-       display: flex;
-       flex-direction: column;
-       gap: 8px;
-       margin: 0 10px 15px;
-   }
-   
-   #bird-articles h3 {
-       font-size: 14px;
-       margin: 0;
-   }
-   
-   #bird-articles a {
-       font-size: 12px;
-       color: #0066cc;
-       text-decoration: underline;
-       overflow-wrap: anywhere;
-   }
-   
-   #bird-articles a[hidden] {
-       display: none;
-   }
-
-   #show-more-container {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-}
-
-//Show more button on results of bird summaries
-//PLEASE LOOK OVER AND CHANGE IF WANTED
-#show-more-button {
-    padding: 12px 30px;
-
-    background-color: #367c39;
-    color: white;
-
-    border: none;
-    border-radius: 6px;
-
-    font-size: 14px;
-    cursor: pointer;
-}
-
-#show-more-button:hover:not(:disabled) {
-    background-color: #285e2b;
-}
-
-#show-more-button:disabled {
-    background-color: #999;
-    cursor: wait;
-}
-
-#show-more-button[hidden] {
-    display: none;
-}
 }

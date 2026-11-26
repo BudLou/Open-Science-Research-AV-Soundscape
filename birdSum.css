@@ -31,6 +31,12 @@ input {
     min-height: 100vh;
 }
 
+#main-content {
+    display: grid;
+    grid-template-rows: auto auto;
+    flex: 1;
+}
+
 
 /* =========================================
    SIDEBAR
@@ -163,17 +169,6 @@ input {
 
 
 /* =========================================
-   MAIN CONTENT
-========================================= */
-
-#main-content {
-    display: grid;
-    grid-template-rows: auto auto;
-    flex: 1;
-}
-
-
-/* =========================================
    SELECTED BIRD
 ========================================= */
 
@@ -195,6 +190,7 @@ input {
     align-items: center;
     padding: 25px;
     border-right: 1px solid #555;
+    background-color: #557c50;
 }
 
 #selected-bird-image {
@@ -316,7 +312,6 @@ input {
 
 #catalog {
     padding: 20px 25px 40px 25px;
-    background-color: #557c50;
 }
 
 #catalog-title {
@@ -416,6 +411,33 @@ input {
 
 
 /* =========================================
+   SHOW MORE BUTTON
+========================================= */
+
+#show-more-button {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 28px;
+    background-color: #557c50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#show-more-button:hover {
+    background-color: #3f633b;
+}
+
+#show-more-button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================================
    RESPONSIVE DESIGN
 ========================================= */
 
@@ -434,21 +456,8 @@ input {
         grid-template-columns: 1fr;
     }
 
-    #selected-bird-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 25px;
-    border-right: 1px solid #555;
-    background-color: #557c50;
-    }
-
     #selected-bird-info {
         padding: 25px;
-    }
-
-    #main-content {
-        grid-template-rows: auto auto;
     }
 
     #bird-results {

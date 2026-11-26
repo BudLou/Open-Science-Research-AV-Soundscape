@@ -1,4 +1,8 @@
 
+/* =========================================
+   GLOBAL
+========================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -16,11 +20,21 @@ input {
     font: inherit;
 }
 
+
+/* =========================================
+   MAIN APPLICATION LAYOUT
+========================================= */
+
 #app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
 
 #sidebar {
     background-color: #b8d0a9;
@@ -58,6 +72,11 @@ input {
     font-weight: normal;
 }
 
+
+/* =========================================
+   SEARCH
+========================================= */
+
 #search-form {
     width: 100%;
 }
@@ -74,6 +93,11 @@ input {
     outline: 2px solid #367c39;
     outline-offset: 2px;
 }
+
+
+/* =========================================
+   FAMILY FILTERS
+========================================= */
 
 #family-section {
     min-height: auto;
@@ -92,6 +116,11 @@ input {
     font-size: 13px;
 }
 
+
+/* =========================================
+   AUDIO FILTER
+========================================= */
+
 #filter-section {
     min-height: auto;
 }
@@ -105,6 +134,11 @@ input {
     font-size: 13px;
 }
 
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
 #account-section {
     display: flex;
     flex-direction: row;
@@ -117,7 +151,7 @@ input {
     margin: 5px;
     padding: 8px 12px;
     text-align: center;
-    background-color: e5f1dc;
+    background-color: #e5f1dc;
     border: 1px solid #aaa;
     border-radius: 5px;
     cursor: pointer;
@@ -127,91 +161,297 @@ input {
     background-color: #d4e7c8;
 }
 
-#gallery-header {
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+
+#main-content {
+    display: grid;
+    grid-template-rows: auto auto;
+    flex: 1;
+}
+
+
+/* =========================================
+   SELECTED BIRD
+========================================= */
+
+#selected-bird {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    min-height: 450px;
+    border-bottom: 1px solid #555;
+}
+
+
+/* =========================================
+   SELECTED BIRD IMAGE
+========================================= */
+
+#selected-bird-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    border-right: 1px solid #555;
+}
+
+#selected-bird-image {
+    display: none;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 3px;
+}
+
+#image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    height: 350px;
+    border: 1px dashed #999;
+    color: #777;
+}
+
+
+/* =========================================
+   SELECTED BIRD INFORMATION
+========================================= */
+
+#selected-bird-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 40px 30px;
+}
+
+#bird-common-name {
+    margin: 5px 0;
     text-align: center;
-    width: 100%;
-    padding: 25px 15px;
-    background-color: #557c50;
+    font-size: 26px;
+    font-weight: normal;
+}
+
+#bird-scientific-name {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+}
+
+#bird-description {
+    min-height: 120px;
+    font-size: 15px;
+    line-height: 1.6;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   AUDIO PLAYER
+========================================= */
+
+#bird-audio {
+    display: none;
+}
+
+#play-audio-button {
+    width: 75px;
+    margin: 20px 10px;
+    padding: 7px 10px;
     color: white;
+    background-color: #0095ff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
-#gallery-header h1 {
-    margin: 0 0 10px 0;
+#play-audio-button:hover:not(:disabled) {
+    background-color: #007bd4;
+}
+
+#play-audio-button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   BIRD STATISTICS
+========================================= */
+
+#bird-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: auto;
+    border: 1px solid #555;
+}
+
+.bird-stat {
+    padding: 8px 4px;
     text-align: center;
+    font-size: 12px;
+    border-right: 1px solid #555;
 }
 
-#gallery-description {
+.bird-stat:last-child {
+    border-right: none;
+}
+
+.stat-label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   SEARCH RESULTS
+========================================= */
+
+#catalog {
+    padding: 20px 25px 40px 25px;
+}
+
+#catalog-title {
     margin: 0;
+    font-size: 21px;
+    font-weight: normal;
+}
+
+#result-count {
+    margin: 5px 0 20px 0;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   STATUS MESSAGES
+========================================= */
+
+#loading-message,
+#error-message,
+#empty-message {
+    display: none;
+    padding: 25px;
     text-align: center;
 }
+
+#error-message {
+    color: #a00000;
+}
+
+
+/* =========================================
+   DYNAMIC BIRD GRID
+========================================= */
 
 #bird-results {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
-    padding: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 25px;
 }
 
 .bird-card {
-    border: 1px solid #b5cba9;
-    border-radius: 10px;
     padding: 12px;
-    cursor: pointer;
+    text-align: center;
     background-color: #b8d0a9;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
 .bird-card img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
-    border-radius: 6px;
-}
-
-#load-more-button {
-    display: block;
-    margin: 30px auto;
-    padding: 12px 28px;
-    background-color: #557c50;
-    color: white;
-    border: none;
     border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
 }
 
-#load-more-button:hover {
-    background-color: #3f633b;
+.bird-card h3 {
+    margin: 8px 0 3px 0;
+    font-size: 13px;
+    font-weight: normal;
 }
 
-#load-more-button:active {
-    transform: scale(0.97);
+.bird-card .scientific-name {
+    margin: 0;
+    font-size: 11px;
+    font-style: italic;
+    color: #444;
 }
 
-.save-bird-button {
-    display: block;
-    width: 80%;
-    margin: 12px auto 2px;
-    padding: 9px 12px;
-    background-color: #557c50;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+.bird-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-.save-bird-button:hover {
-    background-color: #3f633b;
+.bird-card:hover img {
+    opacity: 0.85;
 }
 
-.save-bird-button:active {
-    transform: scale(0.97);
+
+/* =========================================
+   ADDITIONAL SEARCH STYLING
+========================================= */
+
+.bird-card a {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 11px;
+    color: #367c39;
+    text-decoration: none;
+}
+
+.bird-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 800px) {
+
+    #sidebar {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    #site-title {
+        min-width: 180px;
+    }
+
+    #selected-bird {
+        grid-template-columns: 1fr;
+    }
+
+    #selected-bird-image-container {
+        border-right: none;
+        border-bottom: 1px solid #555;
+    }
+
+    #selected-bird-info {
+        padding: 25px;
+    }
+
+    #main-content {
+        grid-template-rows: auto auto;
+    }
+
+    #bird-results {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 15px;
+    }
+
+    #catalog {
+        padding: 15px;
+    }
 }

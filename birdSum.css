@@ -10,10 +10,8 @@
 body {
     margin: 0;
     min-height: 100vh;
-
     font-family: Arial, Helvetica, sans-serif;
     color: #111;
-
     background-color: #e5f1dc;
 }
 
@@ -86,11 +84,14 @@ input {
 #bird-search {
     width: 100%;
     padding: 8px;
-
     border: 1px solid #ccc;
     border-radius: 5px;
-
     background-color: white;
+}
+
+#bird-search:focus {
+    outline: 2px solid #367c39;
+    outline-offset: 2px;
 }
 
 
@@ -99,20 +100,19 @@ input {
 ========================================= */
 
 #family-section {
-    min-height: 195px;
+    min-height: auto;
 }
 
 #family-list {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .family-filter {
     display: flex;
     align-items: center;
     gap: 5px;
-
     font-size: 13px;
 }
 
@@ -122,16 +122,15 @@ input {
 ========================================= */
 
 #filter-section {
-    min-height: 135px;
+    min-height: auto;
 }
 
 .filter-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    margin-top: 25px;
-
+    margin-top: 10px;
+    gap: 10px;
     font-size: 13px;
 }
 
@@ -141,21 +140,20 @@ input {
 ========================================= */
 
 #account-section {
-    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
 }
 
 .account-button {
-    width: 100%;
-    margin: 5px 0;
-    padding: 8px;
-
-    text-align: left;
-
-    background-color: transparent;
-
+    width: auto;
+    margin: 5px;
+    padding: 8px 12px;
+    text-align: center;
+    background-color: #e5f1dc;
     border: 1px solid #aaa;
     border-radius: 5px;
-
     cursor: pointer;
 }
 
@@ -181,11 +179,8 @@ input {
 
 #selected-bird {
     display: grid;
-
     grid-template-columns: 1.3fr 1fr;
-
     min-height: 450px;
-
     border-bottom: 1px solid #555;
 }
 
@@ -198,22 +193,17 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 25px;
-
     border-right: 1px solid #555;
 }
 
 #selected-bird-image {
     display: none;
-
     width: 100%;
     max-width: 700px;
     height: auto;
     max-height: 600px;
-
     object-fit: contain;
-
     border-radius: 3px;
 }
 
@@ -221,13 +211,10 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-
     width: 100%;
     max-width: 700px;
     height: 350px;
-
     border: 1px dashed #999;
-
     color: #777;
 }
 
@@ -239,34 +226,27 @@ input {
 #selected-bird-info {
     display: flex;
     flex-direction: column;
-
     padding: 40px 30px;
 }
 
 #bird-common-name {
     margin: 5px 0;
-
     text-align: center;
-
     font-size: 26px;
     font-weight: normal;
 }
 
 #bird-scientific-name {
     margin-bottom: 25px;
-
     text-align: center;
-
     font-size: 14px;
     font-style: italic;
 }
 
 #bird-description {
     min-height: 120px;
-
     font-size: 15px;
     line-height: 1.6;
-
     white-space: pre-line;
     overflow-wrap: anywhere;
 }
@@ -282,16 +262,12 @@ input {
 
 #play-audio-button {
     width: 75px;
-
     margin: 20px 10px;
     padding: 7px 10px;
-
     color: white;
     background-color: #0095ff;
-
     border: none;
     border-radius: 20px;
-
     cursor: pointer;
 }
 
@@ -311,21 +287,15 @@ input {
 
 #bird-stats {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     margin-top: auto;
-
     border: 1px solid #555;
 }
 
 .bird-stat {
     padding: 8px 4px;
-
     text-align: center;
-
     font-size: 12px;
-
     border-right: 1px solid #555;
 }
 
@@ -335,9 +305,7 @@ input {
 
 .stat-label {
     display: block;
-
     margin-bottom: 3px;
-
     font-weight: bold;
 }
 
@@ -352,14 +320,12 @@ input {
 
 #catalog-title {
     margin: 0;
-
     font-size: 21px;
     font-weight: normal;
 }
 
 #result-count {
     margin: 5px 0 20px 0;
-
     font-size: 13px;
 }
 
@@ -372,9 +338,7 @@ input {
 #error-message,
 #empty-message {
     display: none;
-
     padding: 25px;
-
     text-align: center;
 }
 
@@ -389,24 +353,16 @@ input {
 
 #bird-results {
     display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(160px, 1fr));
-
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 25px;
 }
 
 .bird-card {
     padding: 12px;
-
     text-align: center;
-
     background-color: #b8d0a9;
-
     border-radius: 12px;
-
     cursor: pointer;
-
     transition: transform 0.2s ease,
                 box-shadow 0.2s ease;
 }
@@ -414,31 +370,25 @@ input {
 .bird-card img {
     width: 100%;
     height: 150px;
-
     object-fit: cover;
-
     border-radius: 8px;
 }
 
 .bird-card h3 {
     margin: 8px 0 3px 0;
-
     font-size: 13px;
     font-weight: normal;
 }
 
 .bird-card .scientific-name {
     margin: 0;
-
     font-size: 11px;
     font-style: italic;
-
     color: #444;
 }
 
 .bird-card:hover {
     transform: translateY(-3px);
-
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -451,19 +401,11 @@ input {
    ADDITIONAL SEARCH STYLING
 ========================================= */
 
-#bird-search:focus {
-    outline: 2px solid #367c39;
-    outline-offset: 2px;
-}
-
 .bird-card a {
     display: inline-block;
-
     margin-top: 5px;
-
     font-size: 11px;
     color: #367c39;
-
     text-decoration: none;
 }
 
@@ -492,8 +434,12 @@ input {
     }
 
     #selected-bird-image-container {
-        border-right: none;
-        border-bottom: 1px solid #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    border-right: 1px solid #555;
+    background-color: #557c50;
     }
 
     #selected-bird-info {
@@ -505,9 +451,7 @@ input {
     }
 
     #bird-results {
-        grid-template-columns:
-            repeat(auto-fill, minmax(130px, 1fr));
-
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
         gap: 15px;
     }
 

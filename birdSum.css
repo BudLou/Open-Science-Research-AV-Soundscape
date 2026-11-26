@@ -1,3 +1,4 @@
+
 /* =========================================
    GLOBAL
 ========================================= */
@@ -27,10 +28,8 @@ input {
 ========================================= */
 
 #app {
-    display: grid;
-
-    grid-template-columns: 170px 1fr;
-
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
@@ -76,7 +75,6 @@ input {
 }
 
 
-
 /* =========================================
    SEARCH
 ========================================= */
@@ -87,7 +85,6 @@ input {
 
 #bird-search {
     width: 100%;
-
     padding: 8px;
 
     border: 1px solid #ccc;
@@ -149,7 +146,6 @@ input {
 
 .account-button {
     width: 100%;
-
     margin: 5px 0;
     padding: 8px;
 
@@ -174,8 +170,8 @@ input {
 
 #main-content {
     display: grid;
-
-    grid-template-rows: 460px auto;
+    grid-template-rows: auto auto;
+    flex: 1;
 }
 
 
@@ -186,7 +182,9 @@ input {
 #selected-bird {
     display: grid;
 
-    grid-template-columns: 2fr 1.2fr;
+    grid-template-columns: 1.3fr 1fr;
+
+    min-height: 450px;
 
     border-bottom: 1px solid #555;
 }
@@ -210,10 +208,11 @@ input {
     display: none;
 
     width: 100%;
-    max-width: 500px;
-    height: 270px;
+    max-width: 700px;
+    height: auto;
+    max-height: 600px;
 
-    object-fit: cover;
+    object-fit: contain;
 
     border-radius: 3px;
 }
@@ -224,8 +223,8 @@ input {
     align-items: center;
 
     width: 100%;
-    max-width: 500px;
-    height: 270px;
+    max-width: 700px;
+    height: 350px;
 
     border: 1px dashed #999;
 
@@ -241,7 +240,7 @@ input {
     display: flex;
     flex-direction: column;
 
-    padding: 60px 12px 10px 12px;
+    padding: 40px 30px;
 }
 
 #bird-common-name {
@@ -249,24 +248,27 @@ input {
 
     text-align: center;
 
-    font-size: 23px;
+    font-size: 26px;
     font-weight: normal;
 }
 
 #bird-scientific-name {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     text-align: center;
 
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
 }
 
 #bird-description {
-    min-height: 90px;
+    min-height: 120px;
 
-    font-size: 13px;
-    line-height: 1.3;
+    font-size: 15px;
+    line-height: 1.6;
+
+    white-space: pre-line;
+    overflow-wrap: anywhere;
 }
 
 
@@ -299,7 +301,6 @@ input {
 
 #play-audio-button:disabled {
     background-color: #999;
-
     cursor: not-allowed;
 }
 
@@ -346,7 +347,7 @@ input {
 ========================================= */
 
 #catalog {
-    padding: 5px 10px 30px 10px;
+    padding: 20px 25px 40px 25px;
 }
 
 #catalog-title {
@@ -357,7 +358,7 @@ input {
 }
 
 #result-count {
-    margin: 5px 0 10px 0;
+    margin: 5px 0 20px 0;
 
     font-size: 13px;
 }
@@ -390,15 +391,24 @@ input {
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fill, minmax(140px, 1fr));
+        repeat(auto-fill, minmax(160px, 1fr));
 
-    gap: 25px 35px;
+    gap: 25px;
 }
 
 .bird-card {
+    padding: 12px;
+
     text-align: center;
 
+    background-color: #b8d0a9;
+
+    border-radius: 12px;
+
     cursor: pointer;
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
 .bird-card img {
@@ -407,11 +417,11 @@ input {
 
     object-fit: cover;
 
-    border-radius: 3px;
+    border-radius: 8px;
 }
 
 .bird-card h3 {
-    margin: 4px 0 2px 0;
+    margin: 8px 0 3px 0;
 
     font-size: 13px;
     font-weight: normal;
@@ -423,11 +433,42 @@ input {
     font-size: 11px;
     font-style: italic;
 
-    color: #555;
+    color: #444;
+}
+
+.bird-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 .bird-card:hover img {
-    opacity: 0.8;
+    opacity: 0.85;
+}
+
+
+/* =========================================
+   ADDITIONAL SEARCH STYLING
+========================================= */
+
+#bird-search:focus {
+    outline: 2px solid #367c39;
+    outline-offset: 2px;
+}
+
+.bird-card a {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+    color: #367c39;
+
+    text-decoration: none;
+}
+
+.bird-card a:hover {
+    text-decoration: underline;
 }
 
 
@@ -437,8 +478,13 @@ input {
 
 @media (max-width: 800px) {
 
-    #app {
-        grid-template-columns: 130px 1fr;
+    #sidebar {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    #site-title {
+        min-width: 180px;
     }
 
     #selected-bird {
@@ -451,51 +497,21 @@ input {
     }
 
     #selected-bird-info {
-        padding: 20px;
+        padding: 25px;
     }
 
     #main-content {
         grid-template-rows: auto auto;
     }
 
+    #bird-results {
+        grid-template-columns:
+            repeat(auto-fill, minmax(130px, 1fr));
 
-   /* =========================================
-      ADDITIONAL SEARCH STYLING
-   ========================================= */
-   
-   #bird-search:focus {
-       outline: 2px solid #367c39;
-       outline-offset: 2px;
-   }
-   
-   
-   .bird-card a {
-       display: inline-block;
-   
-       margin-top: 5px;
-   
-       font-size: 11px;
-       color: #367c39;
-   
-       text-decoration: none;
-   }
-   
-   .bird-card a:hover {
-       text-decoration: underline;
-   }
-   
-   
-   .bird-card {
-       transition: transform 0.2s ease;
-   }
-   
-   .bird-card:hover {
-       transform: translateY(-3px);
-   }
-   
-   
-   #bird-description {
-       white-space: pre-line;
-       overflow-wrap: anywhere;
-   }
+        gap: 15px;
+    }
+
+    #catalog {
+        padding: 15px;
+    }
 }
